@@ -153,19 +153,17 @@ public class DoctorService {
             doctor.setCity(city);
         }
 
-
-//        Checking if the email is correct
-        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\." +
-                "[a-zA-Z0-9_+&*-]+)*@" +
-                "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
-                "A-Z]{2,7}$";
-        Pattern pat = Pattern.compile(emailRegex);
-        if (!pat.matcher(email).matches()) {
-            throw new IllegalStateException("Please enter a valid email");
-        }
-
 //        Checking if it is there in params and also if it is different from the current email
         if (email != null && email.length() > 0 && !Objects.equals(doctor.getEmail(), email)) {
+//        Checking if the email is correct
+            String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\." +
+                    "[a-zA-Z0-9_+&*-]+)*@" +
+                    "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
+                    "A-Z]{2,7}$";
+            Pattern pat = Pattern.compile(emailRegex);
+            if (!pat.matcher(email).matches()) {
+                throw new IllegalStateException("Please enter a valid email");
+            }
 //            Checking if the new email is available or not
             Optional<Doctor> doctorOptional = doctorRepository.findDoctorByEmail(email);
             if (doctorOptional.isPresent()) {
@@ -206,7 +204,7 @@ public class DoctorService {
         if (speciality != null && speciality.length() > 0 && !Objects.equals(doctor.getSpeciality(), speciality)) {
             String[] allowedSpeciality = new String[]{"orthopedic", "gynecology", "dermatology", "ent"};
             for (String ele : allowedSpeciality) {
-                if (speciality.equals(ele)) {
+                if (speciality.trim().toLowerCase().equals(ele)) {
                     isValid = true;
                     break;
                 }

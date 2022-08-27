@@ -40,7 +40,8 @@ public class DoctorController {
             @RequestParam(required = false) String city,
             @RequestParam(required = false) String email,
             @RequestParam(required = false) String phoneNumber,
-            @RequestParam(required = false) String speciality)
+            @RequestParam(required = false) String speciality
+    )
     {
         doctorService.updateDoctor(doctorId,name,city,email,phoneNumber,speciality);
     }

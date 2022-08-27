@@ -125,30 +125,29 @@ public class DoctorService {
         doctorRepository.deleteById(doctorId);
     }
 
-
 //    To make changes to existing data of Doctor in database
-//    @Transactional
+    @Transactional
     public void updateDoctor(Long doctorId, String name, String city, String email, String phoneNumber, String speciality) {
-//        Checking if doctor is in database or not
+        //        Checking if doctor is in database or not
         Doctor doctor = doctorRepository.findById(doctorId).orElseThrow(
-                ()-> new IllegalStateException("Doctor with id "+doctorId+" does not exists"));
+                () -> new IllegalStateException("Doctor with id " + doctorId + " does not exists"));
 
 //        Checking if the new name provided is there and if it is different from current name
-        if(name != null && name.length() >= 3 && !Objects.equals(doctor.getName(), name)){
+        if (name != null && name.length() >= 3 && !Objects.equals(doctor.getName(), name)) {
             doctor.setName(name);
         }
 
 //        Checking if the incoming city is valid or not
         boolean isValid = false;
-        if(city != null && city.length() > 0 && city.length() <= 20 && !Objects.equals(doctor.getCity(),city)){
-            String[] allowedCities = new String[]{"delhi","noida","faridabad"};
-            for(String ele:allowedCities){
-                if(city.toLowerCase().trim().equals(ele)){
+        if (city != null && city.length() > 0 && city.length() <= 20 && !Objects.equals(doctor.getCity(), city)) {
+            String[] allowedCities = new String[]{"delhi", "noida", "faridabad"};
+            for (String ele : allowedCities) {
+                if (city.toLowerCase().trim().equals(ele)) {
                     isValid = true;
                     break;
                 }
             }
-            if(!isValid){
+            if (!isValid) {
                 throw new IllegalStateException("Not a valid location");
             }
             doctor.setCity(city);
@@ -156,59 +155,63 @@ public class DoctorService {
 
 
 //        Checking if the email is correct
-        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\." +
                 "[a-zA-Z0-9_+&*-]+)*@" +
                 "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
                 "A-Z]{2,7}$";
         Pattern pat = Pattern.compile(emailRegex);
-        if(!pat.matcher(email).matches()){
+        if (!pat.matcher(email).matches()) {
             throw new IllegalStateException("Please enter a valid email");
         }
 
 //        Checking if it is there in params and also if it is different from the current email
-        if(email != null && email.length() > 0 && !Objects.equals(doctor.getEmail(),email)){
+        if (email != null && email.length() > 0 && !Objects.equals(doctor.getEmail(), email)) {
 //            Checking if the new email is available or not
             Optional<Doctor> doctorOptional = doctorRepository.findDoctorByEmail(email);
-            if(doctorOptional.isPresent()){
+            if (doctorOptional.isPresent()) {
                 throw new IllegalStateException("email taken");
             }
             doctor.setEmail(email);
         }
 
 //        Checking the incoming phone number
-        if(phoneNumber != null && phoneNumber.length() >= 10 && !Objects.equals(doctor.getPhoneNumber(),phoneNumber)){
+        if (phoneNumber != null && phoneNumber.length() >= 10 && !Objects.equals(doctor.getPhoneNumber(), phoneNumber)) {
 //        validates phone numbers having 10 digits (9998887776)
-            if (phoneNumber.matches("\\d{10}")){}
+            if (phoneNumber.matches("\\d{10}")) {
+            }
 
 //        validates phone numbers having digits, -, . or spaces
-            else if (phoneNumber.matches("\\d{3}[-\\.\\s]\\d{3}[-\\.\\s]\\d{4}")){}
-            else if (phoneNumber.matches("\\d{4}[-\\.\\s]\\d{3}[-\\.\\s]\\d{3}")){}
+            else if (phoneNumber.matches("\\d{3}[-\\.\\s]\\d{3}[-\\.\\s]\\d{4}")) {
+            } else if (phoneNumber.matches("\\d{4}[-\\.\\s]\\d{3}[-\\.\\s]\\d{3}")) {
+            }
 
 //        validates phone numbers having digits and extension (length 3 to 5)
-            else if (phoneNumber.matches("\\d{3}-\\d{3}-\\d{4}\\s(x|(ext))\\d{3,5}")){}
+            else if (phoneNumber.matches("\\d{3}-\\d{3}-\\d{4}\\s(x|(ext))\\d{3,5}")) {
+            }
 
 //        validates phone numbers having digits and area code in braces
-            else if (phoneNumber.matches("\\(\\d{3}\\)-\\d{3}-\\d{4}")){}
-            else if (phoneNumber.matches("\\(\\d{5}\\)-\\d{3}-\\d{3}")){}
-            else if (phoneNumber.matches("\\(\\d{4}\\)-\\d{3}-\\d{3}")){}
+            else if (phoneNumber.matches("\\(\\d{3}\\)-\\d{3}-\\d{4}")) {
+            } else if (phoneNumber.matches("\\(\\d{5}\\)-\\d{3}-\\d{3}")) {
+            } else if (phoneNumber.matches("\\(\\d{4}\\)-\\d{3}-\\d{3}")) {
+            }
 
 //        throw error if any of the input matches is not found
-            else{
+            else {
                 throw new IllegalStateException("Not a valid phone number");
             }
             doctor.setPhoneNumber(phoneNumber);
         }
 //        Checking the incoming speciality
         isValid = false;
-        if(speciality != null && speciality.length()>0 && !Objects.equals(doctor.getSpeciality(),speciality)){
+        if (speciality != null && speciality.length() > 0 && !Objects.equals(doctor.getSpeciality(), speciality)) {
             String[] allowedSpeciality = new String[]{"orthopedic", "gynecology", "dermatology", "ent"};
-            for(String ele:allowedSpeciality){
-                if(speciality.equals(ele)){
+            for (String ele : allowedSpeciality) {
+                if (speciality.equals(ele)) {
                     isValid = true;
                     break;
                 }
             }
-            if(!isValid){
+            if (!isValid) {
                 throw new IllegalStateException("Not a valid speciality");
             }
             doctor.setSpeciality(speciality);

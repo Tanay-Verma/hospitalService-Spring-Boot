@@ -14,10 +14,10 @@ public class PatientConfig {
         return args -> {
             Patient surender = new Patient(
                     "Surender",
-                    "Delhi",
+                    "delhi",
                     "surender@gmail.com",
                     "9876543210",
-                    "Ear Pain"
+                    "ear pain"
             );
             repository.saveAll(List.of(surender));
         };

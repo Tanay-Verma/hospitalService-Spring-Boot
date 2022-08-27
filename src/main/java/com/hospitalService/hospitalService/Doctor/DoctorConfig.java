@@ -14,10 +14,10 @@ public class DoctorConfig {
         return args -> {
             Doctor vikram = new Doctor(
                     "Vikram",
-                    "Delhi",
+                    "delhi",
                     "vikram@gmail.com",
                     "9891324430",
-                    "ENT"
+                    "ent"
             );
 //            To save it on our Database
             repository.saveAll(List.of(vikram));

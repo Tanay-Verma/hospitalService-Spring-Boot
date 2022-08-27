@@ -9,20 +9,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.print.Doc;
 import java.util.List;
 
 @RestController
 @RequestMapping(path="api/v1/suggestion")
 public class SuggestionController {
-    private final DoctorController doctorController;
-    private final PatientController patientController;
     private final SuggestionService suggestionService;
 
     @Autowired
-    public SuggestionController(DoctorController doctorController, PatientController patientController, SuggestionService suggestionService) {
-        this.doctorController = doctorController;
-        this.patientController = patientController;
+    public SuggestionController(SuggestionService suggestionService) {
         this.suggestionService = suggestionService;
     }
 

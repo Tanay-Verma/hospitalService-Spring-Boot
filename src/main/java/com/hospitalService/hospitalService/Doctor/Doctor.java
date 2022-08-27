@@ -63,7 +63,7 @@ public class Doctor {
     }
 
     public void setCity(String city) {
-        this.city = city;
+        this.city = city.trim().toLowerCase();
     }
 
     public String getEmail() {
@@ -87,7 +87,7 @@ public class Doctor {
     }
 
     public void setSpeciality(String speciality) {
-        this.speciality = speciality;
+        this.speciality = speciality.trim().toLowerCase();
     }
 
     @Override

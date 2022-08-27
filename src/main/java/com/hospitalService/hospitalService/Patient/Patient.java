@@ -64,7 +64,7 @@ public class Patient {
     }
 
     public void setCity(String city) {
-        this.city = city;
+        this.city = city.trim().toLowerCase();
     }
 
     public String getEmail() {
@@ -88,7 +88,7 @@ public class Patient {
     }
 
     public void setSymptom(String symptom) {
-        this.symptom = symptom;
+        this.symptom = symptom.trim().toLowerCase();
     }
 
     @Override
@@ -102,4 +102,6 @@ public class Patient {
                 ", symptom='" + symptom + '\'' +
                 '}';
     }
+
+
 }

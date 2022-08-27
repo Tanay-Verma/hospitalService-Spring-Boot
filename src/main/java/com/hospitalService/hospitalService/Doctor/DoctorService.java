@@ -28,6 +28,7 @@ public class DoctorService {
         return doctorRepository.findAll();
     }
 
+//    For adding new Doctors
     public void addNewDoctor(Doctor doctor) {
 //        Name Validation Logic
         if(doctor.getName().trim().length() < 3){
@@ -128,7 +129,7 @@ public class DoctorService {
 //    To make changes to existing data of Doctor in database
     @Transactional
     public void updateDoctor(Long doctorId, String name, String city, String email, String phoneNumber, String speciality) {
-        //        Checking if doctor is in database or not
+//        Checking if doctor is in database or not
         Doctor doctor = doctorRepository.findById(doctorId).orElseThrow(
                 () -> new IllegalStateException("Doctor with id " + doctorId + " does not exists"));
 
@@ -153,7 +154,7 @@ public class DoctorService {
             doctor.setCity(city);
         }
 
-//        Checking if it is there in params and also if it is different from the current email
+//        Checking if email is there in params and also if it is different from the current email
         if (email != null && email.length() > 0 && !Objects.equals(doctor.getEmail(), email)) {
 //        Checking if the email is correct
             String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\." +
@@ -199,6 +200,7 @@ public class DoctorService {
             }
             doctor.setPhoneNumber(phoneNumber);
         }
+
 //        Checking the incoming speciality
         isValid = false;
         if (speciality != null && speciality.length() > 0 && !Objects.equals(doctor.getSpeciality(), speciality)) {

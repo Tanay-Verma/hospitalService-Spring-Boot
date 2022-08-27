@@ -1,6 +1,5 @@
 package com.hospitalService.hospitalService.Doctor;
 
-import com.hospitalService.hospitalService.Patient.Patient;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

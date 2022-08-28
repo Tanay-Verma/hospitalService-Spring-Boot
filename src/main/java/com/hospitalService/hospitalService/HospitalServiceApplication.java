@@ -29,16 +29,19 @@ public class HospitalServiceApplication {
 				.apis(RequestHandlerSelectors.basePackage("com.hospitalService.hospitalService"))
 				.paths(PathSelectors.any())
 				.build().apiInfo(metaData());
-		docket.tags(new Tag("Doctor API","Endpoints for doctor api"),
-				new Tag("Patient API","Endpoints for patient api"),
-				new Tag("Suggestion API","Endpoints for suggestion api"));
+		docket.tags(new Tag("Doctor API","For all Doctors related operations"),
+				new Tag("Patient API","For all Patients related operations"),
+				new Tag("Suggestion API","For getting Doctor suggestions based on symptoms of Patients"));
 		return docket;
 	}
 
 	private ApiInfo metaData() {
 		return new ApiInfoBuilder()
-				.title("Hospital Service - Spring Boot Swagger Configuration")
-				.description("\"Swagger configuration for application\"")
+				.title("Hospital Service API")
+				.description("This API allows you to" + "\n" +
+						"-> Register Doctors on the database " + "\n" +
+						"-> Register Patients on the database" + "\n" +
+						"-> Suggesting Doctors based on Patient's symptom")
 				.version("1")
 				.build();
 	}

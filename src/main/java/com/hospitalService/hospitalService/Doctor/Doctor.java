@@ -25,14 +25,14 @@ public class Doctor {
     public Doctor() {
     }
 
-    public Doctor(Long id, String name, String city, String email, String phoneNumber, String speciality) {
-        this.id = id;
-        this.name = name;
-        this.city = city;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.speciality = speciality;
-    }
+//    public Doctor(Long id, String name, String city, String email, String phoneNumber, String speciality) {
+//        this.id = id;
+//        this.name = name;
+//        this.city = city;
+//        this.email = email;
+//        this.phoneNumber = phoneNumber;
+//        this.speciality = speciality;
+//    }
 
     public Doctor(String name, String city, String email, String phoneNumber, String speciality) {
         this.name = name;

@@ -23,15 +23,22 @@ public class SuggestionService {
     }
 
     public List<Doctor> suggestDoctors(Long patientId) {
+//        Getting patient data by their id
         Optional<Patient> patientOptional = patientRepository.findById(patientId);
         Patient newPatient = (Patient) patientOptional.stream().toArray()[0];
+
+//        Getting the city of the patient
         String city = newPatient.getCity().trim().toLowerCase();
-        String symptom = newPatient.getSymptom().trim().toLowerCase();
+
+//        Getting all the doctors which are in the same city as patient
         Optional<Doctor> doctorOptional = doctorRepository.findDoctorByCity(city);
+
+//        If no doctor is available in the patient's city
         if(doctorOptional.isEmpty()){
             throw new IllegalStateException("We are still waiting to expand to your location");
         }
 
+//        Mapping speciality with their symptoms in a HashMap
         String[] orthopedic = new String[]{"arthritis", "backpain", "tissue injuries"};
         String[] gynecology = new String[]{"dysmenorrhea"};
         String[] dermatology = new String[]{"skin infection","skin burn"};
@@ -41,6 +48,13 @@ public class SuggestionService {
         map.put("gynecology",gynecology);
         map.put("dermatology",dermatology);
         map.put("ent",ent);
+
+//        Getting the patient's symptom
+        String symptom = newPatient.getSymptom().trim().toLowerCase();
+
+//        Main suggestion logic
+//        looping through the array of doctors in the same city and checking their speciality
+//        to see if the patients symptoms match up with doctor's speciality
         for(int i=0;i< doctorOptional.stream().toArray().length;i++){
             Doctor doctor = (Doctor) doctorOptional.stream().toArray()[i];
             String speciality = doctor.getSpeciality().trim().toLowerCase();
@@ -51,6 +65,8 @@ public class SuggestionService {
                 }
             }
         }
+
+//        If the doctors are in the same city but do not have speciality needed for the patient's symptom
         throw new IllegalStateException("There isn’t any doctor present at your location for your symptom");
     }
 }

@@ -12,6 +12,7 @@ public class PatientConfig {
     @Bean
     CommandLineRunner patientCommandLineRunnerLineRunner(PatientRepository repository){
         return args -> {
+//        This adds one row of data to our patient table in hospital database
             Patient surender = new Patient(
                     "Surender",
                     "delhi",

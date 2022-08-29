@@ -14,6 +14,7 @@ public interface DoctorRepository extends JpaRepository<Doctor,Long> {
 //    This lets us search Doctors my email for email validation
     @Query("SELECT s FROM Doctor s WHERE s.email = ?1")
     Optional<Doctor> findDoctorByEmail(String email);
+//    This lets us search Doctors my city for the suggestion api
     @Query("SELECT s FROM Doctor s WHERE s.city = ?1")
     Optional<Doctor> findDoctorByCity(String city);
 }

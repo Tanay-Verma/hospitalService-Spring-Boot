@@ -32,7 +32,9 @@ public class PatientController {
     @PostMapping
     @ApiOperation(
             value="Add Patients",
-            notes="Adds patient to the database. Accepts a JSON. In the example given below do not supply any \"id\" as it is auto generated, you can either not supply it at all or send it with value 0.",
+            notes="Adds patient to the database. Accepts a JSON."+"\n"+
+                    "IMPORTANT NOTE::"+"\n"+
+                    "In the example given below do not supply any \"id\" as it is auto generated, you can either not supply it at all or send it with value 0.",
             tags={"Patient API"})
     public void registerNewPatient(@RequestBody Patient patient){
         patientService.addNewPatient(patient);

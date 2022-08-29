@@ -26,15 +26,6 @@ public class Patient {
     public Patient() {
     }
 
-    public Patient(Long id, String name, String city, String email, String phoneNumber, String symptom) {
-        this.id = id;
-        this.name = name;
-        this.city = city;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.symptom = symptom;
-    }
-
     public Patient(String name, String city, String email, String phoneNumber, String symptom) {
         this.name = name;
         this.city = city;
@@ -45,10 +36,6 @@ public class Patient {
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {

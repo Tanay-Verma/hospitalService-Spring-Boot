@@ -3,11 +3,9 @@ package com.hospitalService.hospitalService.Doctor;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.print.Doc;
 import java.util.List;
 
 @RestController
@@ -33,7 +31,9 @@ public class DoctorController {
     @PostMapping
     @ApiOperation(
             value="Add Doctors",
-            notes="Adds doctor to the database. Accepts a JSON. In the example given below do not supply any \"id\" as it is auto generated, you can either not supply it at all or send it with value 0.",
+            notes="Adds doctor to the database. Accepts a JSON." + "\n" +
+                    "IMPORTANT NOTE::"+ "\n" +
+                    "In the example given below do not supply any \"id\" as it is auto generated, you can either not supply it at all or send it with value 0.",
             tags={"Doctor API"})
     public void registerNewDoctor(@RequestBody Doctor doctor){
         doctorService.addNewDoctor(doctor);

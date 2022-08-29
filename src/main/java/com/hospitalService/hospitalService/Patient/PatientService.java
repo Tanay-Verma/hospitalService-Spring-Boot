@@ -1,7 +1,6 @@
 // This is the Service Layer
 package com.hospitalService.hospitalService.Patient;
 
-import com.hospitalService.hospitalService.Doctor.Doctor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -68,7 +67,6 @@ public class PatientService {
             throw new IllegalStateException("Enter at least 10 digits");
         }
 
-
 //        validates phone numbers having 10 digits (9998887776)
         if (patient.getPhoneNumber().matches("\\d{10}")){}
 
@@ -90,9 +88,10 @@ public class PatientService {
         }
 
 //        Symptom Validation Logic
-        String[] allowedSymptom = new String[]{"arthritis", "backpain", "tissue injuries", "gynecology", "dysmenorrhea ", "skin infection", "skin burn","ear pain"};
+        String[] allowedSymptom = new String[]{"arthritis", "backpain", "tissue injuries", "gynecology", "dysmenorrhea", "skin infection", "skin burn","ear pain"};
         boolean isValid = false;
         for(String symptom:allowedSymptom){
+            System.out.println("Patient symptom: "+patient.getSymptom().trim().toLowerCase()+"\n"+"Symptom: "+symptom);
             if(patient.getSymptom().trim().toLowerCase().equals(symptom)){
                 isValid = true;
                 break;

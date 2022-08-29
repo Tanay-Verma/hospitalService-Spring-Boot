@@ -12,6 +12,7 @@ public class DoctorConfig {
 
     @Bean
     CommandLineRunner doctorCommandLineRunner(DoctorRepository repository){
+//        This adds one row of data to our doctor table in hospital database
         return args -> {
             Doctor vikram = new Doctor(
                     "Vikram",
